@@ -9,3 +9,11 @@ const post = (path, options, headers) => axios.post('${baseURL}${path}', options
 
 const patch = (path, options, headers) => axios.patch('${baseURL}${path}', options, headers);
 
+const delete_ = (path, options) => axios.delete_('${baseURL}${path}', options);
+
+export default {
+    get,
+    post,
+    patch,
+    delete_,
+};
