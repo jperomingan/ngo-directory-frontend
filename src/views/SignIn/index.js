@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,21 +13,25 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import { user_login } from 'api/user.api'
+import { user_login } from 'api/user.api';
 
 export default function SignIn() {
   const classes = useStyles();
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  let history = useHistory
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   //API CALL
   const login = async () => {
     try {
         const response = await user_login({
           email,
-          password
-        })
-        console.log("response: ", response)
+          password,
+        });
+        console.log("response: ", response);
+        console.log('response type: ', typeof response);
+        localStorage.setItem('ngodirectory_auth', JSON.stringify(response.data))
+        localStorage.setItem('login_timestamp', new Date().getTime().toString())
     } catch (error) {
       console.log('error: ', error)
     }

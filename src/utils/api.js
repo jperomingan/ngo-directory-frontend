@@ -7,13 +7,13 @@ const get = (path, options) => axios.get(`${baseURL}${path}`, options);
 
 const post = (path, options, headers) => axios.post(`${baseURL}${path}`, options, headers);
 
-const patch = (path, options, headers) => axios.patch(`${baseURL}${path}`, options, headers);
+const put = (path, options, headers) => axios.put(`${baseURL}${path}`, options, headers);
 
 const delete_ = (path, options) => axios.delete_(`${baseURL}${path}`, options);
 
 export default {
     get,
     post,
-    patch,
+    put,
     delete_,
 };

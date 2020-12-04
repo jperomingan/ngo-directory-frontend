@@ -5,8 +5,7 @@ export const auth = {
     timeLimit,
     isTokenExpired:
     (new Date().getTime() - parseInt(`${localStorage.getItem('login_timestamp')}` || '0')) / 
-    1000 >
-    timeLimit,
+    1000 > timeLimit,
 }; 
 
 export const retrieveUserCredential = () => {
