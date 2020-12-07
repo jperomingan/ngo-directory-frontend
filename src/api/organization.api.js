@@ -4,5 +4,5 @@ import { retrieveUserCredential } from 'utils/auth'
 const headers = { headers: { Authorization: `Bearer ${retrieveUserCredential().access_token}` } }
 
 export function allOrganizations() {
-    return api.get('/organizations', headers);
+    return api.get(`/organizations`, headers);
 }

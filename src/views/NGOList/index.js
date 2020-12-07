@@ -15,17 +15,26 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 
 import { allOrganizations } from 'api/organization.api';
+import { managedOrganizationByUser } from 'api/user.api';
 
 export default function NGOList() {
   const classes = useStyles();
   const [organizations, setOrganizations] = useState([]);
+  const [managedOrganizations, setManagedOrganizations] = useState([]);
+
   useEffect(() => {
       const loadOrganizations = async() => {
         const response = await allOrganizations()
         console.log('response get organizations: ', response.data.data)
         setOrganizations(response.data.data);
       }
+      const user_id = localStorage.getItem("user_id")
+      const loadManagedOrgs = async () => {
+        const response2 = await managedOrganizationByUser(user_id)
+        setManagedOrganizations(response2.data.data);
+      }
       loadOrganizations();
+      loadManagedOrgs();
   }, [])
 
   return (
@@ -56,11 +65,11 @@ export default function NGOList() {
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Typography variant="h5" align="left" color="textPrimary">
-            Other Organizations
+            Organizations You Manage
           </Typography>
           <br></br>
           <Grid container spacing={4}>
-            {organizations.map((card) => (
+            {managedOrganizations.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
@@ -87,7 +96,7 @@ export default function NGOList() {
         </Container>
         <Container className={classes.cardGrid} maxWidth="md">
           <Typography variant="h5" align="left" color="textPrimary">
-            Organizations You Manage
+            Other Organizations
           </Typography>
           <br></br>
           <Grid container spacing={4}>
