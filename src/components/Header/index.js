@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { auth } from 'utils/auth'
+
 export default function Header() {
   const classes = useStyles();
 
@@ -54,9 +56,14 @@ export default function Header() {
               Support
             </Link>
           </nav>
-          <Button href="#" variant="outlined" className={classes.link}>
+          {auth.isLoggedIn ? (
+              <Button href="#" variant="outlined" className={classes.link}>
+              Logout
+            </Button>
+          ) : (<Button href="#" variant="outlined" className={classes.link}>
             Login
-          </Button>
+          </Button>)
+        }
         </Toolbar>
       </AppBar>
     </React.Fragment>

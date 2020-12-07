@@ -13,11 +13,12 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { auth } from 'utils/auth'
 import { user_login } from 'api/user.api';
 
 export default function SignIn() {
   const classes = useStyles();
-  let history = useHistory
+  let history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -32,6 +33,8 @@ export default function SignIn() {
         console.log('response type: ', typeof response);
         localStorage.setItem('ngodirectory_auth', JSON.stringify(response.data))
         localStorage.setItem('login_timestamp', new Date().getTime().toString())
+        auth.isLoggedIn = true;
+        history.push('/list');
     } catch (error) {
       console.log('error: ', error)
     }

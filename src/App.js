@@ -6,14 +6,16 @@ import SignIn from 'views/SignIn';
 import SignUp from 'views/SignUp';
 import NGOList from 'views/NGOList';
 
+import { PrivateRoute, PublicRoute } from 'views';
+
 function App() {
   return (
     <Router>
-      <Header />
+      <Route component={Header} />
       <Switch>
-        <Route exact path='/' component={SignIn}></Route>
-        <Route exact path='/signup' component={SignUp}></Route>
-        <Route exact path='/list' component={NGOList}></Route>
+        <PublicRoute restricted={true} exact path='/' component={SignIn} />
+        <PublicRoute restricted={true} exact path='/signup' component={SignUp} />
+        <PrivateRoute exact path='/list' component={NGOList} />
       </Switch>
     </Router>
   )
